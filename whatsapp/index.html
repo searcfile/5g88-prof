@@ -50,7 +50,7 @@
   .reply-snippet{font-size:12px;color:#d2d7db}
 
   /* hover menu */
-  .bubble .kebab{position:absolute;top:6px;right:6px;opacity:0;transition:.15s;cursor:pointer;padding:2px 6px;border-radius:6px;color:#e9edefaa}
+  .bubble .kebab{position:absolute;top:6px;z-index:2;right:6px;opacity:0;transition:.15s;cursor:pointer;padding:2px 6px;border-radius:6px;color:#e9edefaa}
   .bubble:hover .kebab{opacity:1;background:#00000022}
   .menu{position:absolute;top:26px;right:6px;background:var(--menu);border-radius:8px;box-shadow:var(--shadow);display:none;overflow:hidden;min-width:140px}
   .menu a{display:block;padding:8px 10px;text-decoration:none;color:var(--text);font-size:13px}
@@ -89,8 +89,8 @@
     .sender{order:3}
   }
   /* tails like WhatsApp */
-  .row.me .bubble::after{content:'';position:absolute;right:-9px;top:0.5px;width:0;height:0;border-left:25px solid var(--bubble-me);border-bottom:28px solid transparent;}
-  .row.them .bubble::before{content:'';position:absolute;left:-6px;top:6px;width:0;height:0;border-right:6px solid var(--bubble-them);border-top:6px solid transparent;border-bottom:6px solid transparent;filter:drop-shadow(0 1px 0 rgba(0,0,0,.25));}
+  .row.me .bubble::after{content:'';position:absolute;right:-9px;top:0px;width:0;height:0;border-left:25px solid var(--bubble-me);border-bottom:28px solid transparent;}
+  .row.them .bubble::before{content:'';position:absolute;left:-9px;top:0px;width:0;height:0;border-right:25px solid var(--bubble-them);border-bottom:28px solid transparent;}
 </style>
 </head>
 <body>
