@@ -16,8 +16,8 @@
     --gold-3:#f1b70a;
     --success:#25d366;
     --danger:#ff5c6a;
-    /* 👉 atur ukuran logo di tengah roda */
-    --logo-size: 72px;
+    --logo-size:72px;       /* ukuran logo di pusat roda */
+    --bulb-count: 48;       /* jumlah lampu keliling */
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -48,7 +48,6 @@
   .btn.ghost{ background:transparent; color:var(--ink); border:1px solid #2a2d3e; box-shadow:none; }
   .btn.success{ background:linear-gradient(180deg,#39e08a,#1fb86b); color:#06120b }
   .btn.danger{ background:linear-gradient(180deg,#ff6d7a,#ef3c50); color:#230509 }
-  .btn.full{width:100%}
   .content{padding:18px}
   .footer{padding:14px 18px; border-top:1px solid #1b1e2a; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
   .row{display:grid; gap:10px}
@@ -59,25 +58,26 @@
   textarea{min-height:110px; resize:vertical}
   .names{ display:flex; flex-wrap:wrap; gap:8px; max-height:180px; overflow:auto; padding-right:4px; }
   .name-pill{ background:linear-gradient(180deg,#1a1d28,#121522); border:1px solid #2a2d3e; border-radius:999px; padding:8px 12px; display:inline-flex; gap:10px; align-items:center;}
-  .name-pill b{letter-spacing:.2px}
   .name-pill button{ background:#1f2230; color:#b6b9c5; border:1px solid #2f3346; border-radius:8px; padding:4px 8px; cursor:pointer;}
 
   /* ===== Wheel Area ===== */
   .stage{ position:relative; display:flex; align-items:center; justify-content:center; padding:18px; background: radial-gradient(800px 400px at 50% -10%, rgba(245,197,66,.08), transparent 60%), linear-gradient(180deg, #0e0f15, #0a0b10);}
   .wheel-wrap{ position:relative; width:min(560px, 92vw); aspect-ratio:1/1; display:grid; place-items:center; margin:10px auto; filter: drop-shadow(0 30px 60px rgba(0,0,0,.45)); }
-  .pointer{ position:absolute; top:-8px; width:0; height:0; z-index:5; border-left:16px solid transparent; border-right:16px solid transparent; border-bottom:26px solid var(--gold); filter: drop-shadow(0 4px 10px rgba(0,0,0,.6)); }
-  .wheel{ width:100%; height:100%; border-radius:50%; background:#111; display:block; transform:rotate(var(--deg, 0deg)); transition: transform var(--dur, 0s) var(--easing, ease-out); border:10px solid #0e0f15; box-shadow:inset 0 0 0 2px #2a2d3e, 0 0 0 8px #161823, inset 0 40px 80px rgba(0,0,0,.25); }
+  .pointer{ position:absolute; top:-8px; width:0; height:0; z-index:6; border-left:16px solid transparent; border-right:16px solid transparent; border-bottom:26px solid var(--gold); filter: drop-shadow(0 4px 10px rgba(0,0,0,.6)); }
+  .wheel{ width:100%; height:100%; border-radius:50%; background:#111; display:block; transform:rotate(var(--deg, 0deg)); transition: transform var(--dur, 0s) var(--easing, ease-out); border:10px solid #0e0f15; box-shadow:inset 0 0 0 2px #2a2d3e, 0 0 0 8px #161823, inset 0 40px 80px rgba(0,0,0,.25); z-index:2 }
   .wheel text{ paint-order:stroke; stroke:rgba(0,0,0,.36); stroke-width:.6px; }
 
   /* HUB + LOGO DI TENGAH */
-  .hub{ position:absolute; width:calc(var(--logo-size) + 20px); height:calc(var(--logo-size) + 20px); border-radius:50%; background: radial-gradient(circle at 35% 35%, #fff, #ccc 40%, #777 65%, #333 85%); box-shadow: 0 8px 30px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.6); z-index:3; display:grid; place-items:center; overflow:hidden;}
+  .hub{ position:absolute; width:calc(var(--logo-size) + 20px); height:calc(var(--logo-size) + 20px); border-radius:50%; background: radial-gradient(circle at 35% 35%, #fff, #ccc 40%, #777 65%, #333 85%); box-shadow: 0 8px 30px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.6); z-index:5; display:grid; place-items:center; overflow:hidden;}
   .hub::after{ content:""; position:absolute; inset:8px; border-radius:50%; background: radial-gradient(circle at 35% 35%, rgba(245,197,66,.7), rgba(241,183,10,.6)); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 22px rgba(245,197,66,.45); filter: blur(0.3px);}
   .hub-logo{ position:relative; z-index:2; width:var(--logo-size); height:var(--logo-size); object-fit:contain; image-rendering:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
-  .ring{ position:absolute; inset:-24px; border-radius:50%; pointer-events:none; }
-  .ring::before{ content:""; position:absolute; inset:0; border-radius:50%; background: radial-gradient(circle, rgba(255,255,255,.95) 0 55%, rgba(255,255,255,0) 60%) 50% 0/10% 10% repeat, radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold-3)); -webkit-mask: radial-gradient(circle, #000 52%, #0000 53%) 50% 50%/100% 100% no-repeat, conic-gradient(from 0deg, #000 0 360deg); mask: radial-gradient(circle, #000 52%, #0000 53%) 50% 50%/100% 100% no-repeat, conic-gradient(from 0deg, #000 0 360deg); filter: drop-shadow(0 0 6px rgba(245,197,66,.85)) drop-shadow(0 0 14px rgba(245,197,66,.45)); animation: bulbs-rotate 9s linear infinite;}
-  .ring::after{ content:""; position:absolute; inset:0; border-radius:50%; animation: blink 1.2s steps(2,end) infinite; box-shadow: inset 0 0 0 2px rgba(245,197,66,.35), inset 0 0 60px rgba(245,197,66,.18); }
-  @keyframes bulbs-rotate{ to{ transform: rotate(360deg) } }
-  @keyframes blink{ 50%{ box-shadow: inset 0 0 0 2px rgba(245,197,66,.6), inset 0 0 80px rgba(245,197,66,.26);} }
+
+  /* SVG lampu keliling: aman, tidak menutupi isi */
+  .bulbs{ position:absolute; inset:-20px; width:calc(100% + 40px); height:calc(100% + 40px); z-index:4; pointer-events:none; animation: bulbsSpin 9s linear infinite; }
+  .bulb{ fill:url(#bulbGrad); filter: drop-shadow(0 0 6px rgba(245,197,66,.85)) drop-shadow(0 0 14px rgba(245,197,66,.45)); }
+  .bulb.blink{ animation: blink 1.2s steps(2,end) infinite; }
+  @keyframes bulbsSpin{ to{ transform: rotate(360deg) } }
+  @keyframes blink{ 50%{ opacity:.6 } }
 
   .winner-badge{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); background:linear-gradient(180deg, rgba(245,197,66,.18), rgba(245,197,66,.06)); border:1px solid rgba(245,197,66,.35); border-radius:12px; padding:10px 14px; font-weight:700; color:var(--gold-2); letter-spacing:.3px; backdrop-filter: blur(6px); box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08); min-width:220px; text-align:center; display:none; }
 
@@ -105,14 +105,26 @@
       <div class="stage">
         <div class="wheel-wrap">
           <div class="pointer"></div>
+
+          <!-- Roda -->
           <svg class="wheel" id="wheel" viewBox="-50 -50 100 100" aria-label="Spin Wheel"></svg>
 
-          <!-- 👉 LOGO kamu di tengah -->
+          <!-- Logo di tengah (opsional) -->
           <div class="hub">
-            <img class="hub-logo" src="./logo.png" alt="5G88 x EVO VIP">
+            <img class="hub-logo" src="./logo.png" alt="5G88 x EVO VIP" onerror="this.style.display='none'">
           </div>
 
-          <div class="ring"></div>
+          <!-- Lampu keliling (SVG aman) -->
+          <svg class="bulbs" id="bulbs" viewBox="-60 -60 120 120" aria-hidden="true">
+            <defs>
+              <radialGradient id="bulbGrad" cx="35%" cy="35%">
+                <stop offset="0%" stop-color="#fff"/>
+                <stop offset="55%" stop-color="#fff"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </radialGradient>
+            </defs>
+          </svg>
+
           <div class="winner-badge" id="winnerBadge">—</div>
         </div>
       </div>
@@ -179,6 +191,7 @@
 (function(){
   const LS_KEY = 'lucky_draw_names.v1';
   const wheel = document.getElementById('wheel');
+  const bulbs = document.getElementById('bulbs');
   const badge = document.getElementById('winnerBadge');
   const namesListEl = document.getElementById('namesList');
   const countInfo = document.getElementById('countInfo');
@@ -193,6 +206,7 @@
   let spinning = false;
   let currentRotation = 0; // deg
 
+  /* ===== Helpers ===== */
   function saveNames(){ localStorage.setItem(LS_KEY, JSON.stringify(NAMES)); }
   function loadNames(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'[]'); }catch{ return [] } }
   function unique(arr){ return [...new Set(arr.map(s=>s.trim()).filter(Boolean))]; }
@@ -207,6 +221,31 @@
     return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
   }
 
+  /* ===== Render bulbs (lampu keliling) ===== */
+  function renderBulbs(){
+    bulbs.innerHTML = `
+      <defs>
+        <radialGradient id="bulbGrad" cx="35%" cy="35%">
+          <stop offset="0%" stop-color="#fff"/><stop offset="55%" stop-color="#fff"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+      </defs>`;
+    const total = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bulb-count')) || 48;
+    const r = 56; // radius posisi lampu (lebih besar dari roda)
+    for(let i=0;i<total;i++){
+      const a = rad((i/total)*360);
+      const x = r*Math.cos(a), y = r*Math.sin(a);
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx', x.toFixed(2));
+      c.setAttribute('cy', y.toFixed(2));
+      c.setAttribute('r', '2.6');
+      c.setAttribute('class', 'bulb blink');
+      c.style.animationDelay = (i*0.05)+'s';
+      bulbs.appendChild(c);
+    }
+  }
+
+  /* ===== Render daftar & wheel ===== */
   function renderNamesPills(){
     namesListEl.innerHTML='';
     NAMES.forEach((n,i)=>{
@@ -221,7 +260,7 @@
     countInfo.textContent=`${NAMES.length} nama`;
   }
 
-  // --- teks di dalam slice, center & rotate ---
+  // Teks di dalam slice
   function renderWheel(){
     const total=Math.max(NAMES.length,1);
     wheel.innerHTML='';
@@ -273,9 +312,14 @@
     wheel.appendChild(g);
   }
 
-  function update(){ renderWheel(); renderNamesPills(); saveNames(); }
+  function update(){
+    renderWheel();
+    renderBulbs();
+    renderNamesPills();
+    saveNames();
+  }
 
-  // --- Spin ---
+  /* ===== Spin ===== */
   function spin(opts={}){
     if(spinning || NAMES.length===0) return;
     spinning=true; badge.style.display='none';
@@ -302,7 +346,7 @@
     }, duration+60);
   }
 
-  // --- Confetti ---
+  /* ===== Confetti ===== */
   let confettis=[];
   function resizeCanvas(){ confettiCanvas.width=innerWidth; confettiCanvas.height=innerHeight; }
   addEventListener('resize',resizeCanvas); resizeCanvas();
@@ -320,7 +364,7 @@
   })();
   function showConfetti(){ makeConfettiBurst(260); }
 
-  // --- Tick sound (opsional) ---
+  /* ===== Tick sound (opsional) ===== */
   const audioCtx=window.AudioContext? new AudioContext(): null;
   function playTickSound(duration){
     if(!audioCtx) return;
@@ -329,7 +373,7 @@
     while(t<end){ tick(t); t+=interval; }
   }
 
-  // --- UI ---
+  /* ===== UI ===== */
   document.getElementById('btnSpin').onclick=()=>spin();
   document.getElementById('btnSpinQuick').onclick=()=>spin({quick:true});
   document.getElementById('btnShuffle').onclick=()=>{ for(let i=NAMES.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [NAMES[i],NAMES[j]]=[NAMES[j],NAMES[i]]; } update(); };
@@ -345,8 +389,10 @@
 
   function showWinnerModal(name){ winNameEl.textContent=name; winModal.style.display='flex'; }
 
+  // Init
   update();
 
+  // Shortcuts
   document.addEventListener('keydown',(e)=>{
     if(e.code==='Space'){ e.preventDefault(); spin(); }
     if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='i'){ document.getElementById('nameInput').focus(); }
