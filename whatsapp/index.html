@@ -91,6 +91,11 @@
   /* tails like WhatsApp */
   .row.me .bubble::after{content:'';position:absolute;right:-6px;top:6px;width:0;height:0;border-left:6px solid var(--bubble-me);border-top:6px solid transparent;border-bottom:6px solid transparent;filter:drop-shadow(0 1px 0 rgba(0,0,0,.25));}
   .row.them .bubble::before{content:'';position:absolute;left:-6px;top:6px;width:0;height:0;border-right:6px solid var(--bubble-them);border-top:6px solid transparent;border-bottom:6px solid transparent;filter:drop-shadow(0 1px 0 rgba(0,0,0,.25));}
+  /* stack wrapper to place time under image */
+  .row .stack{display:flex;flex-direction:column;max-width:min(78%,640px)}
+  .row.me .stack{align-items:flex-end}
+  .row.them .stack{align-items:flex-start}
+  .meta-out{position:static;margin-top:4px;color:#cfd8dc90;font-size:11px;line-height:1;text-align:right;padding-right:6px}
 </style>
 </head>
 <body>
@@ -183,6 +188,9 @@
     const row = document.createElement('div');
     row.className = 'row ' + (m.from==='you'?'me':'them');
 
+    const stack = document.createElement('div');
+    stack.className = 'stack';
+
     const b = document.createElement('div');
     b.className = 'bubble';
 
@@ -240,9 +248,21 @@
       const p = document.createElement('div'); p.className='caption'; p.textContent=m.text; b.appendChild(p);
     }
 
-    const meta = document.createElement('div'); meta.className='meta'; meta.textContent = m.time; b.appendChild(meta);
+    // append bubble and time (special case for image)
+    stack.appendChild(b);
+    if(m.img){
+      const metaOut = document.createElement('div');
+      metaOut.className = 'meta-out';
+      metaOut.textContent = m.time;
+      stack.appendChild(metaOut);
+    } else {
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = m.time;
+      b.appendChild(meta);
+    }
 
-    row.appendChild(b);
+    row.appendChild(stack);
     return row;
   }
 
