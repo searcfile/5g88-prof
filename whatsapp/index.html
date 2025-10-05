@@ -96,6 +96,10 @@
   .row.me .stack{align-items:flex-end}
   .row.them .stack{align-items:flex-start}
   .meta-out{position:static;margin-top:4px;color:#cfd8dc90;font-size:11px;line-height:1;text-align:right;padding-right:6px}
+  /* media overlay time like WhatsApp image */
+  .bubble.media{padding:0; overflow:hidden}
+  .bubble.media .shade{position:absolute; left:0; right:0; bottom:0; height:42px; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%); pointer-events:none}
+  .bubble .media-meta{right:8px; bottom:6px; color:#e9edef; text-shadow:0 1px 1px rgba(0,0,0,.5)}
 </style>
 </head>
 <body>
@@ -248,13 +252,18 @@
       const p = document.createElement('div'); p.className='caption'; p.textContent=m.text; b.appendChild(p);
     }
 
-    // append bubble and time (special case for image)
+    // append bubble and time (image overlay when no caption)
     stack.appendChild(b);
-    if(m.img){
-      const metaOut = document.createElement('div');
-      metaOut.className = 'meta-out';
-      metaOut.textContent = m.time;
-      stack.appendChild(metaOut);
+
+    if(m.img && !m.text){
+      b.classList.add('media');
+      const shade = document.createElement('div');
+      shade.className = 'shade';
+      b.appendChild(shade);
+      const meta = document.createElement('div');
+      meta.className = 'meta media-meta';
+      meta.textContent = m.time;
+      b.appendChild(meta);
     } else {
       const meta = document.createElement('div');
       meta.className = 'meta';
