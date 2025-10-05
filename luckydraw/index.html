@@ -3,24 +3,26 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lucky Draw — 5G88 x EVO VIP</title>
+<title>Lucky Draw — Aurora Neon</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --bg1:#0b0c12; --bg2:#07080d;
-  --card:#11131b; --border:#1c2030;
-  --ink:#ecf0f6;  --muted:#9aa0ab;
-  --gold:#ffd76b; --gold-2:#f5c542; --gold-3:#f1b70a;
-  --accent:#4aa8ff; --success:#25d366; --danger:#ff5c6a;
-  --logo-size:78px;
-  --bulb-count:56;
+  --bg1:#070a12; --bg2:#05060a;
+  --card1:#0e1220; --card2:#0a0e19; --border:#1b2033;
+  --ink:#eef2f8;  --muted:#9aa5b4;
+
+  --logo-size:76px;
+  --bulb-count:60;
+
+  /* palet aksen aurora */
+  --c1:#66e3ff; --c2:#6cf7b3; --c3:#ffd86b; --c4:#ff7bd4; --c5:#8ea0ff;
 }
 *{box-sizing:border-box} html,body{height:100%}
 body{
   margin:0;
   background:
-    radial-gradient(1200px 800px at 10% -10%, #131625 0%, transparent 60%),
-    radial-gradient(900px 600px at 110% 0%, #0c1020 0%, transparent 55%),
+    radial-gradient(1200px 800px at 10% -10%, #141b33 0%, transparent 60%),
+    radial-gradient(900px 600px at 110% 0%, #0f1630 0%, transparent 55%),
     linear-gradient(180deg,var(--bg1),var(--bg2));
   color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
   display:flex; align-items:center; justify-content:center; padding:18px;
@@ -30,106 +32,109 @@ body{
 
 .card{
   background:
-    radial-gradient(120% 80% at 50% -30%, rgba(255,255,255,.06), transparent 50%),
-    linear-gradient(180deg,#121626,#0d1120);
+    radial-gradient(120% 80% at 50% -30%, rgba(255,255,255,.08), transparent 50%),
+    linear-gradient(180deg,var(--card1),var(--card2));
   border:1px solid var(--border); border-radius:20px;
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.05),
-    inset 0 -80px 120px rgba(255,255,255,.02);
+  box-shadow:0 30px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05);
   overflow:hidden;
 }
 .header{
   display:flex; align-items:center; justify-content:space-between;
-  padding:14px 18px; border-bottom:1px solid #1b2030;
+  padding:14px 18px; border-bottom:1px solid #18203a;
   background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
 }
-.title{font-weight:800; letter-spacing:.3px; display:flex; align-items:center; gap:10px}
+.title{font-weight:900; letter-spacing:.3px; display:flex; align-items:center; gap:10px}
 .title .dot{
   width:12px; height:12px; border-radius:50%;
-  background: radial-gradient(circle at 35% 35%, var(--gold), var(--gold-3));
-  box-shadow:0 0 16px rgba(245,197,66,.7), 0 0 40px rgba(245,197,66,.25) inset;
+  background: radial-gradient(circle at 35% 35%, var(--c3), #f1b70a);
+  box-shadow:0 0 16px rgba(255,216,107,.8), 0 0 40px rgba(255,216,107,.24) inset;
 }
 .toolbar{display:flex; gap:10px; flex-wrap:wrap}
 .btn{
   appearance:none; border:none; padding:10px 14px; border-radius:12px; cursor:pointer;
-  font-weight:800; letter-spacing:.2px;
-  color:#0b0b0f; background:linear-gradient(180deg,#ffd86c,#f1b70a);
-  box-shadow:0 10px 30px rgba(245,197,66,.25), inset 0 1px 0 rgba(255,255,255,.55);
+  font-weight:800; letter-spacing:.2px; color:#061016;
+  background:linear-gradient(180deg, var(--c3), #f1b70a);
+  box-shadow:0 10px 30px rgba(255,216,107,.25), inset 0 1px 0 rgba(255,255,255,.55);
   transition:.2s transform ease, .25s filter ease, .2s box-shadow ease;
 }
 .btn:hover{ transform:translateY(-1px) }
 .btn:active{ transform:translateY(1px) scale(.98) }
 .btn.ghost{
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  color:var(--ink); border:1px solid #2a3046; box-shadow:none;
+  color:var(--ink); border:1px solid #2a3352; box-shadow:none;
 }
-.btn.success{ background:linear-gradient(180deg,#3aef91,#18c56b); color:#03180e }
-.btn.danger{ background:linear-gradient(180deg,#ff7683,#ef3c50); color:#26040a }
+.btn.success{
+  background:linear-gradient(180deg,#48f0a6,#19c876); color:#03180e
+}
+.btn.danger{
+  background:linear-gradient(180deg,#ff6f8b,#ef3c50); color:#26040a
+}
 .content{padding:18px}
-.footer{padding:14px 18px; border-top:1px solid #1b2030; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between;}
+.footer{padding:14px 18px; border-top:1px solid #18203a; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between;}
 .row{display:grid; gap:10px}
 .row-inline{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
 .grow{flex:1}
 label{font-size:12px; color:var(--muted); margin-bottom:6px; display:block}
 input[type="text"], textarea{
-  width:100%; background:linear-gradient(180deg,#0c0f1a,#0a0e18);
+  width:100%; background:linear-gradient(180deg,#0b0f1a,#0a0e18);
   border:1px solid #232a42; color:var(--ink);
   padding:12px; border-radius:12px; outline:none; font-size:14px;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.02), 0 6px 30px rgba(0,0,0,.25);
 }
 textarea{min-height:110px; resize:vertical}
-.names{ display:flex; flex-wrap:wrap; gap:8px; max-height:200px; overflow:auto; padding-right:4px; }
+.names{ display:flex; flex-wrap:wrap; gap:8px; max-height:220px; overflow:auto; padding-right:4px; }
 .name-pill{
-  background:linear-gradient(180deg,#171b2a,#0f1322);
-  border:1px solid #28314a; border-radius:999px; padding:8px 12px; display:inline-flex; gap:10px; align-items:center;
+  background:linear-gradient(180deg,#151b31,#0f1426);
+  border:1px solid #2b375d; border-radius:999px; padding:8px 12px; display:inline-flex; gap:10px; align-items:center;
 }
 .name-pill b{letter-spacing:.2px}
-.name-pill button{ background:#1c2236; color:#c6cad6; border:1px solid #2f3958; border-radius:8px; padding:4px 8px; cursor:pointer;}
+.name-pill button{ background:#1c233c; color:#c6cad6; border:1px solid #2f3c66; border-radius:8px; padding:4px 8px; cursor:pointer;}
 
 .stage{
   position:relative; display:flex; align-items:center; justify-content:center; padding:18px;
   background:
-    radial-gradient(60% 40% at 50% 0%, rgba(90,120,255,.12), transparent 60%),
-    linear-gradient(180deg, #0e1222, #0a0d18);
+    radial-gradient(60% 40% at 50% 0%, rgba(120,150,255,.16), transparent 60%),
+    conic-gradient(from 0deg at 50% 30%, rgba(102,227,255,.1), rgba(108,247,179,.1), rgba(255,216,107,.1), rgba(255,123,212,.1), rgba(142,160,255,.1), rgba(102,227,255,.1)),
+    linear-gradient(180deg, #0d1120, #090d18);
 }
 .wheel-wrap{
-  position:relative; width:min(620px, 92vw); aspect-ratio:1/1;
+  position:relative; width:min(640px, 92vw); aspect-ratio:1/1;
   display:grid; place-items:center; margin:10px auto;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,.5));
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.55));
 }
+
+/* Panah penentu */
 .pointer{
-  position:absolute; top:-5px; z-index:7; width:0; height:0;
+  position:absolute; top:-2px; z-index:7; width:0; height:0;
   border-left:18px solid transparent; border-right:18px solid transparent; border-bottom:28px solid #fff;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,.55));
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.55));
 }
-.pointer::after{
-  content:""; position:absolute; left:-18px; right:-18px; top:22px; height:12px; border-radius:10px;
-  background: radial-gradient(120% 80% at 50% 0%, rgba(0,0,0,.5), transparent 70%);
+.pointer .glow{
+  position:absolute; left:-20px; right:-20px; top:20px; height:16px; border-radius:12px;
+  background: radial-gradient(140% 90% at 50% 0%, rgba(255,255,255,.5), rgba(255,255,255,0) 65%);
 }
-.pointer.on{ animation: pointerPulse 1.2s ease-in-out infinite; }
+.pointer.on{ animation: pointerPulse 1.4s ease-in-out infinite; }
 @keyframes pointerPulse{
   0%,100% { transform: translateY(0) }
   50% { transform: translateY(-2px) }
 }
 
+/* Roda */
 .wheel{
   width:100%; height:100%; border-radius:50%; display:block;
-  transform:rotate(var(--deg, 0deg)); transition: transform var(--dur, 0s) var(--easing, ease-out);
+  transform:rotate(var(--deg, 0deg));
+  transition: transform var(--dur, 0s) var(--easing, ease-out);
   border:12px solid #0e0f15;
   background:
     radial-gradient(70% 70% at 30% 25%, rgba(255,255,255,.12), transparent 40%),
     radial-gradient(120% 120% at 70% 80%, rgba(0,0,0,.35), transparent 50%),
     #0d0f15;
-  box-shadow:
-    inset 0 0 0 2px #2a2d3e,
-    0 0 0 10px #151826,
-    inset 0 60px 120px rgba(0,0,0,.3);
+  box-shadow: inset 0 0 0 2px #2a2d3e, 0 0 0 10px #161a2a, inset 0 60px 120px rgba(0,0,0,.3);
   z-index:2
 }
 .wheel path{ filter: drop-shadow(0 0 0.4px rgba(0,0,0,.4)); }
 .wheel text{
-  fill:#fff; font-weight:800; letter-spacing:.15px;
+  fill:#fff; font-weight:900; letter-spacing:.15px;
   paint-order:stroke; stroke:rgba(0,0,0,.36); stroke-width:.6px;
 }
 
@@ -144,31 +149,33 @@ textarea{min-height:110px; resize:vertical}
 }
 .hub::after{
   content:""; position:absolute; inset:10px; border-radius:50%;
-  background: radial-gradient(circle at 35% 35%, rgba(255,220,120,.8), rgba(241,183,10,.7));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 26px rgba(245,197,66,.55);
+  background: radial-gradient(circle at 35% 35%, rgba(255,220,120,.85), rgba(241,183,10,.75));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 30px rgba(245,197,66,.6);
 }
 .hub-logo{ position:relative; z-index:2; width:var(--logo-size); height:var(--logo-size); object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
 
 /* Bulbs (SVG) */
-.bulbs{ position:absolute; inset:-22px; width:calc(100% + 44px); height:calc(100% + 44px); z-index:5; pointer-events:none; animation: bulbsRotate 9s linear infinite;}
-.bulb{ fill:url(#bulbGrad); filter: drop-shadow(0 0 7px rgba(245,197,66,.9)) drop-shadow(0 0 16px rgba(245,197,66,.45)); }
+.bulbs{ position:absolute; inset:-22px; width:calc(100% + 44px); height:calc(100% + 44px); z-index:5; pointer-events:none; animation: bulbsRotate 10s linear infinite;}
+.bulb{ fill:url(#bulbGrad); filter: drop-shadow(0 0 7px rgba(255,255,255,.95)) drop-shadow(0 0 16px rgba(135,206,255,.45)); }
 .bulb.blink{ animation: blink 1.2s steps(2,end) infinite; }
 @keyframes bulbsRotate{ to{ transform: rotate(360deg) } }
 @keyframes blink{ 50%{ opacity:.6 } }
 
+/* Winner chip */
 .winner-badge{
   position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  border:1px solid rgba(245,197,66,.35); border-radius:14px; padding:12px 16px;
-  font-weight:900; color:var(--gold); letter-spacing:.35px; backdrop-filter: blur(8px);
-  box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.25); border-radius:14px; padding:12px 16px;
+  font-weight:900; color:#ffe082; letter-spacing:.35px; backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.1);
   min-width:240px; text-align:center; display:none;
 }
 
+/* Confetti & Modal */
 canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-events:none; z-index:9999; }
 .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:10000; background:rgba(0,0,0,.35); backdrop-filter: blur(3px); }
 .modal .box{ width:min(520px, 92vw); background:linear-gradient(180deg, #141622, #0f111a); border:1px solid #2a2e42; border-radius:16px; padding:18px; text-align:center; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
-.modal h2{margin:10px 0 6px; color:var(--gold)}
+.modal h2{margin:10px 0 6px; color:#ffe082}
 .modal p{margin:0 0 12px; color:#cfd3da}
 </style>
 </head>
@@ -188,12 +195,12 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
       </div>
       <div class="stage">
         <div class="wheel-wrap">
-          <div class="pointer" id="pointer"></div>
+          <div class="pointer" id="pointer"><div class="glow"></div></div>
 
           <svg class="wheel" id="wheel" viewBox="-50 -50 100 100" aria-label="Spin Wheel"></svg>
 
           <div class="hub">
-            <img class="hub-logo" src="./logo.png" alt="5G88 x EVO VIP" onerror="this.style.display='none'">
+            <img class="hub-logo" src="./logo.png" alt="Logo" onerror="this.style.display='none'">
           </div>
 
           <svg class="bulbs" id="bulbs" viewBox="-60 -60 120 120" aria-hidden="true">
@@ -259,7 +266,7 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
   <div class="modal" id="winModal" role="dialog" aria-modal="true">
     <div class="box">
       <h2>Pemenang! 🎉</h2>
-      <p id="winName" style="font-size:26px;font-weight:900;letter-spacing:.4px;color:var(--gold)">—</p>
+      <p id="winName" style="font-size:26px;font-weight:900;letter-spacing:.4px;color:#ffe082">—</p>
       <div class="row-inline" style="justify-content:center">
         <button class="btn" id="btnSpinAgain">Spin Lagi</button>
         <button class="btn ghost" id="btnCloseModal">Tutup</button>
@@ -285,32 +292,34 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
   let NAMES = loadNames();
   if(!NAMES.length){ NAMES = ['Alex','Bella','Chong','Dina','Evan','Farah','Gopal','Hana']; }
   let spinning = false;
-  let currentRotation = 0; // absolute rotation we set
+  let currentRotation = 0; // absolute rotation deg
 
   /* ===== Helpers ===== */
+  const rad = d => d * Math.PI / 180;
+  const norm = d => ((d % 360) + 360) % 360;
   function saveNames(){ localStorage.setItem(LS_KEY, JSON.stringify(NAMES)); }
   function loadNames(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'[]'); }catch{ return [] } }
   function unique(arr){ return [...new Set(arr.map(s=>s.trim()).filter(Boolean))]; }
   function anglePerSlice(){ return 360 / Math.max(NAMES.length,1); }
-  const rad = d => d * Math.PI / 180;
-  const norm = d => ((d % 360) + 360) % 360;
-
-  function colorAt(i,total){
-    const hue=(i*(360/total)+10)%360;
-    const s=76, l=i%2?50:40;
-    return `hsl(${hue} ${s}% ${l}%)`;
-  }
   function arcPath(cx,cy,r,startDeg,endDeg){
     const large=(endDeg-startDeg)>180?1:0;
     const x1=cx+r*Math.cos(rad(startDeg)), y1=cy+r*Math.sin(rad(startDeg));
     const x2=cx+r*Math.cos(rad(endDeg)),   y2=cy+r*Math.sin(rad(endDeg));
     return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
   }
+  // palet aurora halus
+  function colorAt(i,total){
+    const hues=[180,145,50,315,225]; // kira2 sesuai c1..c5
+    const l = i%2?52:42, s=76;
+    const h = hues[i % hues.length] + Math.floor(i/5)*9;
+    return `hsl(${h} ${s}% ${l}%)`;
+  }
+  function escapeHTML(s){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])) }
 
   /* ===== Bulbs ===== */
   function renderBulbs(){
     bulbs.innerHTML = bulbs.querySelector('defs').outerHTML; // keep gradient
-    const total = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bulb-count')) || 56;
+    const total = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bulb-count')) || 60;
     const r = 58;
     for(let i=0;i<total;i++){
       const a = rad((i/total)*360);
@@ -318,7 +327,7 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
       const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
       c.setAttribute('cx', x.toFixed(2));
       c.setAttribute('cy', y.toFixed(2));
-      c.setAttribute('r', '2.5');
+      c.setAttribute('r', '2.3');
       c.setAttribute('class', 'bulb blink');
       c.style.animationDelay = (i*0.04)+'s';
       bulbs.appendChild(c);
@@ -339,15 +348,14 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
     });
     countInfo.textContent=`${NAMES.length} nama`;
   }
-  function escapeHTML(s){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])) }
 
-  /* ===== Wheel render (labels inside) ===== */
+  /* ===== Wheel render: labels di dalam slice ===== */
   function renderWheel(){
     const total=Math.max(NAMES.length,1);
     wheel.innerHTML='';
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
     const A=360/total;
-    const baseFont=Math.max(2.8, Math.min(5.8, 9-total*0.3));
+    const baseFont=Math.max(2.8, Math.min(6.0, 9-total*0.3));
 
     for(let i=0;i<total;i++){
       const start=-90+i*A, end=start+A, mid=(start+end)/2;
@@ -365,7 +373,7 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
       const t=document.createElementNS('http://www.w3.org/2000/svg','text');
       t.setAttribute('fill','#fff');
       t.setAttribute('font-size',String(baseFont));
-      t.setAttribute('font-weight','800');
+      t.setAttribute('font-weight','900');
       t.setAttribute('text-anchor','middle');
       t.setAttribute('dominant-baseline','middle');
       t.setAttribute('x','28'); t.setAttribute('y','0');
@@ -394,10 +402,7 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
 
   function update(){ renderWheel(); renderBulbs(); renderNamesPills(); saveNames(); }
 
-  /* ======= Spin with CONSISTENT winner =======
-     - We compute absolute final rotation.
-     - After transition ends, we derive winner from final angle under pointer.
-  */
+  /* ======= Spin: cepat -> melambat, pemenang konsisten di panah ======= */
   function spin({quick=false}={}){
     if(spinning || NAMES.length===0) return;
     spinning=true;
@@ -405,17 +410,17 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
     pointer.classList.add('on');
 
     const slice = anglePerSlice();
-    const rounds = quick ? 5 : 10;
+    const rounds = quick ? 8 : 12;        // lebih banyak putaran tapi durasi tetap → start terasa cepat
+    const duration = quick ? 2200 : 3600; // total waktu
 
-    // Pick a target INDEX uniformly…
+    // target index dipilih, lalu roda mendarat tepat di tengah slice tsb
     const targetIndex = Math.floor(Math.random() * NAMES.length);
-    // …and land exactly at the CENTER of that slice:
-    const sliceCenter = -90 + (targetIndex + 0.5) * slice;  // deg
-    const finalRotation = currentRotation + rounds*360 + (-sliceCenter); // rotate wheel so that center hits pointer
+    const sliceCenter = -90 + (targetIndex + 0.5) * slice;
+    const finalRotation = currentRotation + rounds*360 + (-sliceCenter);
 
-    const duration = quick ? 2400 : 4800;
+    // kurva easing: start kenceng, akhir melambat halus
     wheel.style.setProperty('--dur', duration+'ms');
-    wheel.style.setProperty('--easing','cubic-bezier(.12,.05,0,1)');
+    wheel.style.setProperty('--easing','cubic-bezier(0.10, 0.88, 0.08, 1)'); // cepat di awal, slow di akhir
     currentRotation = finalRotation;
     wheel.style.setProperty('--deg', currentRotation+'deg');
 
@@ -423,11 +428,11 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
       wheel.removeEventListener('transitionend', onDone);
       pointer.classList.remove('on');
 
-      // compute winner FROM FINAL ANGLE (authoritative)
+      // hitung pemenang dari posisi AKHIR di bawah panah
       const R = norm(currentRotation);
       const idx = indexFromRotation(R, slice);
-
       const winner = NAMES[idx];
+
       badge.textContent = 'Pemenang: ' + winner;
       badge.style.display = 'block';
       showConfetti();
@@ -440,15 +445,12 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
       spinning=false;
     };
     wheel.addEventListener('transitionend', onDone, {once:true});
-
     playTickSound(duration);
   }
 
-  // Given final wheel rotation R (deg), compute which index is at pointer (top).
   function indexFromRotation(R, slice){
-    // theta_i = -90 + (i+0.5)*slice ; we need theta_i ≡ -R
+    // tengah slice i: theta_i = -90 + (i+0.5)*slice  -> ingin theta_i ≡ -R
     const raw = ((90 - R) / slice) - 0.5;
-    // round to nearest integer to avoid floating noise then mod
     const i = ((Math.round(raw) % NAMES.length) + NAMES.length) % NAMES.length;
     return i;
   }
@@ -457,7 +459,7 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
   let confettis=[];
   function resizeCanvas(){ confettiCanvas.width=innerWidth; confettiCanvas.height=innerHeight; }
   addEventListener('resize',resizeCanvas); resizeCanvas();
-  function makeConfettiBurst(n=260){
+  function makeConfettiBurst(n=300){
     confettis=[];
     for(let i=0;i<n;i++){
       confettis.push({
@@ -485,15 +487,15 @@ canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-eve
     confettis = confettis.filter(p=>p.life>0 && p.y<confettiCanvas.height+20);
     requestAnimationFrame(step);
   })();
-  function showConfetti(){ makeConfettiBurst(280); }
+  function showConfetti(){ makeConfettiBurst(320); }
 
   /* ===== Tick sound (soft) ===== */
   const audioCtx = window.AudioContext ? new AudioContext() : null;
   function playTickSound(duration){
     if(!audioCtx) return;
-    const start=audioCtx.currentTime, end=start+duration/1000; let t=start, interval=0.07;
+    const start=audioCtx.currentTime, end=start+duration/1000; let t=start, interval=0.06;
     function tick(at){ const o=audioCtx.createOscillator(); const g=audioCtx.createGain();
-      o.type='square'; o.frequency.value=900;
+      o.type='square'; o.frequency.value=950;
       g.gain.setValueAtTime(0.0001,at);
       g.gain.exponentialRampToValueAtTime(0.12,at+0.005);
       g.gain.exponentialRampToValueAtTime(0.0001,at+0.04);
