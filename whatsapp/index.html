@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WA Chat Mock — Edit • Reply • Image/Caption</title>
+<style>
+  :root{
+    --bg:#0b141a;          /* WhatsApp dark background */
+    --pane:#111b21;        /* chat pane */
+    --bubble-me:#005c4b;   /* my message */
+    --bubble-them:#1f2c34; /* boss message */
+    --text:#e9edef;
+    --muted:#99aab5;
+    --accent:#29a784;
+    --accent-2:#53bdeb;
+    --danger:#ff5c5c;
+    --menu:#233138;
+    --menu-hover:#2c3f47;
+    --shadow: 0 4px 14px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:linear-gradient(180deg,#111,#0b141a 120px) fixed;color:var(--text);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+
+  .app{max-width:920px;margin:0 auto;min-height:100%;display:grid;grid-template-rows:64px 1fr auto;gap:0}
+  .header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#1f2c34;box-shadow:var(--shadow);position:sticky;top:0;z-index:5}
+  .avatar{width:36px;height:36px;border-radius:50%;background:#2b3942;display:grid;place-items:center;font-weight:700}
+  .title{font-weight:600}
+  .sub{color:var(--muted);font-size:12px}
+
+  .pane{background:var(--pane);display:grid;grid-template-columns:1fr;}
+  .messages{padding:18px 18px 80px;display:flex;flex-direction:column;gap:8px;}
+
+  .row{display:flex;gap:8px}
+  .row.me{justify-content:flex-end}
+  .row.them{justify-content:flex-start}
+
+  .bubble{position:relative;max-width:min(78%,640px);padding:8px 10px;border-radius:10px;box-shadow:var(--shadow)}
+  .row.me .bubble{background:var(--bubble-me)}
+  .row.them .bubble{background:var(--bubble-them)}
+  .meta{margin-top:6px;color:#cfd8dc80;font-size:11px;display:flex;gap:8px;justify-content:flex-end}
+
+  .bubble .img{display:block;max-width:100%;height:auto;border-radius:8px;margin:-2px 0 6px}
+  .caption{white-space:pre-wrap}
+
+  /* reply preview inside bubble */
+  .reply-box{border-left:3px solid var(--accent-2);background:#00000025;padding:6px 8px;border-radius:8px;margin-bottom:6px}
+  .reply-title{font-size:12px;color:var(--accent-2);margin-bottom:2px}
+  .reply-snippet{font-size:12px;color:#d2d7db}
+
+  /* hover menu */
+  .bubble .kebab{position:absolute;top:6px;right:6px;opacity:0;transition:.15s;cursor:pointer;padding:2px 6px;border-radius:6px;color:#e9edefaa}
+  .bubble:hover .kebab{opacity:1;background:#00000022}
+  .menu{position:absolute;top:26px;right:6px;background:var(--menu);border-radius:8px;box-shadow:var(--shadow);display:none;overflow:hidden;min-width:140px}
+  .menu a{display:block;padding:8px 10px;text-decoration:none;color:var(--text);font-size:13px}
+  .menu a:hover{background:var(--menu-hover)}
+
+  /* composer */
+  .composer{position:sticky;bottom:0;background:#202c33;padding:10px 12px;display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:end}
+  .sender{display:flex;gap:8px;align-items:center;background:#111b21;border-radius:10px;padding:6px 8px}
+  .sender label{display:flex;gap:6px;align-items:center}
+  .sender input{accent-color:var(--accent)}
+
+  .input{display:flex;gap:8px;align-items:end}
+  .input textarea{resize:vertical;min-height:42px;max-height:180px;width:100%;border-radius:10px;border:none;outline:none;padding:10px 12px;background:#2a3942;color:var(--text)}
+  .input .attach{position:relative}
+  .input .attach input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .attach .btn{border:1px dashed #4a5b61;background:#223038;color:#b7c4c9;padding:8px 10px;border-radius:10px}
+  .actions{display:flex;gap:8px}
+  button{border:0;border-radius:10px;padding:10px 14px;background:var(--accent);color:#042;cursor:pointer;font-weight:600}
+  .ghost{background:#2a3942;color:#cfe6ee}
+  .danger{background:var(--danger);color:#220}
+
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .tiny{font-size:12px;color:var(--muted)}
+
+  .replying{background:#22333a;border:1px solid #2e4f57;padding:8px 10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+  .replying strong{color:var(--accent-2)}
+  .x{cursor:pointer;padding:4px 8px;border-radius:6px;background:#2a3942}
+
+  .toolbar{display:flex;gap:8px;margin-left:auto}
+
+  /* mobile tweaks */
+  @media (max-width:560px){
+    .bubble{max-width:86%}
+    .header{padding:10px}
+    .composer{grid-template-columns:1fr}
+    .sender{order:3}
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="header">
+    <div class="avatar">G</div>
+    <div>
+      <div class="title">ganapathi Aa1122 ( Ganapathi … )</div>
+      <div class="sub">WhatsApp mock — for evidence/demo</div>
+    </div>
+    <div class="toolbar" style="margin-left:auto">
+      <button class="ghost" id="btnExport">Export JSON</button>
+      <button class="ghost" id="btnImport">Import JSON</button>
+      <button class="danger" id="btnClear">Clear Chat</button>
+    </div>
+  </div>
+
+  <div class="pane">
+    <div class="messages" id="messages"></div>
+  </div>
+
+  <div class="composer">
+    <div class="sender" title="Choose sender">
+      <label><input type="radio" name="from" value="you" checked/> You</label>
+      <label><input type="radio" name="from" value="boss"/> Boss</label>
+    </div>
+
+    <div class="input">
+      <div style="width:100%">
+        <div id="replyCtx" class="replying" style="display:none">
+          <div class="tiny">Replying to <strong id="replyName">—</strong>: <span id="replySnippet"></span></div>
+          <div class="x" id="cancelReply">✕</div>
+        </div>
+        <div id="editCtx" class="replying" style="display:none">
+          <div class="tiny"><strong>Editing message…</strong></div>
+          <div class="x" id="cancelEdit">✕</div>
+        </div>
+        <textarea id="text" placeholder="Type message or caption…"></textarea>
+      </div>
+      <div class="attach">
+        <input id="file" type="file" accept="image/*" />
+        <div class="btn">📎 Attach</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="btnSend">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const storeKey = 'wa_mock_v1';
+
+  const state = {
+    messages: [],        // {id, from:'you'|'boss', text, img, time, replyTo}
+    replyingTo: null,    // id
+    editingId: null,     // id
+  };
+
+  // --- utils ---
+  const id = () => Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4);
+  const nowTime = () => new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  const esc = s => (s||'').replace(/[&<>]/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+  const snippet = m => (m.img ? '[image]' : (m.text||'')).slice(0,50);
+
+  // --- persistence ---
+  function save(){ localStorage.setItem(storeKey, JSON.stringify(state.messages)); }
+  function load(){ try{ state.messages = JSON.parse(localStorage.getItem(storeKey)||'[]'); }catch{ state.messages=[]; } }
+
+  // --- rendering ---
+  function render(){
+    const box = $('#messages');
+    box.innerHTML = '';
+    state.messages.forEach(m => box.appendChild(renderMsg(m)));
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function renderMsg(m){
+    const row = document.createElement('div');
+    row.className = 'row ' + (m.from==='you'?'me':'them');
+
+    const b = document.createElement('div');
+    b.className = 'bubble';
+
+    // kebab + menu
+    const kebab = document.createElement('div');
+    kebab.className = 'kebab';
+    kebab.textContent = '⋮';
+    const menu = document.createElement('div');
+    menu.className = 'menu';
+
+    const actReply = document.createElement('a'); actReply.href='#'; actReply.textContent='Reply';
+    const actEdit  = document.createElement('a'); actEdit.href='#'; actEdit.textContent='Edit';
+    const actDel   = document.createElement('a'); actDel.href='#'; actDel.textContent='Delete';
+
+    [actReply,actEdit,actDel].forEach(a=>menu.appendChild(a));
+    b.appendChild(kebab); b.appendChild(menu);
+
+    kebab.addEventListener('click', e=>{
+      e.stopPropagation();
+      // toggle
+      menu.style.display = menu.style.display==='block' ? 'none' : 'block';
+      // close others
+      $$('.menu').forEach(x=>{ if(x!==menu) x.style.display='none'; });
+    });
+    document.addEventListener('click', ()=> menu.style.display='none');
+
+    actReply.addEventListener('click', e=>{ e.preventDefault(); beginReply(m.id); });
+    actEdit.addEventListener('click',  e=>{ e.preventDefault(); beginEdit(m.id);  });
+    actDel.addEventListener('click',   e=>{ e.preventDefault(); delMsg(m.id);     });
+
+    // reply preview
+    if(m.replyTo){
+      const ref = state.messages.find(x=>x.id===m.replyTo);
+      if(ref){
+        const r = document.createElement('div'); r.className='reply-box';
+        r.innerHTML = `<div class="reply-title">Reply to ${ref.from==='you'?'You':'Boss'}</div>
+                       <div class="reply-snippet">${esc(snippet(ref))}</div>`;
+        b.appendChild(r);
+      }
+    }
+
+    // image
+    if(m.img){
+      const im = document.createElement('img');
+      im.className='img'; im.src=m.img; im.alt='image';
+      b.appendChild(im);
+    }
+
+    // caption / text
+    if(m.text){
+      const p = document.createElement('div'); p.className='caption'; p.textContent=m.text; b.appendChild(p);
+    }
+
+    const meta = document.createElement('div'); meta.className='meta'; meta.textContent = m.time; b.appendChild(meta);
+
+    row.appendChild(b);
+    return row;
+  }
+
+  // --- actions ---
+  function sendMessage(){
+    const text = $('#text').value.trim();
+    const from = document.querySelector('input[name=from]:checked').value;
+    const file = $('#file').files[0];
+
+    if(!text && !file){ $('#text').focus(); return; }
+
+    const common = { from, time: nowTime() };
+
+    // editing
+    if(state.editingId){
+      const idx = state.messages.findIndex(m=>m.id===state.editingId);
+      if(idx>-1){
+        state.messages[idx].text = text || '';
+        if(file){
+          const url = URL.createObjectURL(file);
+          state.messages[idx].img = url;
+        } else if($('#file').dataset.keep!=='1'){
+          // keep existing img unless not changed; dataset.keep used when entering edit with image to keep current
+        }
+      }
+      state.editingId = null; $('#editCtx').style.display='none';
+      $('#file').value = ''; $('#text').value='';
+      state.replyingTo = null; $('#replyCtx').style.display='none';
+      save(); render(); return;
+    }
+
+    const push = (imgURL) => {
+      state.messages.push({ id:id(), text, img:imgURL||'', replyTo: state.replyingTo, ...common });
+      $('#text').value=''; $('#file').value='';
+      state.replyingTo=null; $('#replyCtx').style.display='none';
+      save(); render();
+    }
+
+    if(file){
+      const imgURL = URL.createObjectURL(file);
+      push(imgURL);
+    } else {
+      push('');
+    }
+  }
+
+  function beginReply(msgId){
+    const ref = state.messages.find(m=>m.id===msgId); if(!ref) return;
+    state.replyingTo = msgId;
+    $('#replyName').textContent = ref.from==='you'?'You':'Boss';
+    $('#replySnippet').textContent = snippet(ref);
+    $('#replyCtx').style.display='flex';
+    $('#text').focus();
+  }
+
+  function beginEdit(msgId){
+    const m = state.messages.find(x=>x.id===msgId); if(!m) return;
+    state.editingId = msgId;
+    $('#text').value = m.text||'';
+    $('#editCtx').style.display='flex';
+    $('#text').focus();
+    // mark to keep existing image unless user selects new
+    $('#file').dataset.keep = m.img? '1':'0';
+  }
+
+  function delMsg(msgId){
+    if(!confirm('Delete this message?')) return;
+    state.messages = state.messages.filter(m=>m.id!==msgId);
+    save(); render();
+  }
+
+  // --- header tools ---
+  $('#btnClear').addEventListener('click',()=>{
+    if(confirm('Clear all chat?')){ state.messages=[]; save(); render(); }
+  });
+
+  $('#btnExport').addEventListener('click',()=>{
+    const blob = new Blob([JSON.stringify(state.messages,null,2)], {type:'application/json'});
+    const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='chat.json'; a.click();
+  });
+
+  $('#btnImport').addEventListener('click',()=>{
+    const pick = document.createElement('input'); pick.type='file'; pick.accept='application/json';
+    pick.onchange = e=>{
+      const f = e.target.files[0]; if(!f) return;
+      const reader = new FileReader();
+      reader.onload = () => { try{ state.messages = JSON.parse(reader.result||'[]'); save(); render(); } catch{} };
+      reader.readAsText(f);
+    };
+    pick.click();
+  });
+
+  // --- composer binds ---
+  $('#btnSend').addEventListener('click', sendMessage);
+  $('#text').addEventListener('keydown', e=>{
+    if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+  });
+  $('#cancelReply').addEventListener('click', ()=>{ state.replyingTo=null; $('#replyCtx').style.display='none'; });
+  $('#cancelEdit').addEventListener('click', ()=>{ state.editingId=null; $('#editCtx').style.display='none'; $('#text').value=''; $('#file').value=''; });
+
+  // --- bootstrap with stored demo or sample ---
+  load();
+  if(state.messages.length===0){
+    const t = nowTime();
+    state.messages = [
+      {id:id(), from:'you',  text:'Done in boss ❤️\nWish You Luck Win Biggest!🎉🥳', img:'', time:t},
+      {id:id(), from:'boss', text:'Moi cuci 800', img:'', time:t},
+    ];
+    save();
+  }
+  render();
+})();
+</script>
+</body>
+</html>
