@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lucky Draw — 5G88 Style</title>
+<title>Lucky Draw — 5G88 x EVO VIP</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -16,6 +16,8 @@
     --gold-3:#f1b70a;
     --success:#25d366;
     --danger:#ff5c6a;
+    /* 👉 atur ukuran logo di tengah roda */
+    --logo-size: 72px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -24,7 +26,7 @@
     background:
       radial-gradient(1200px 800px at 10% -10%, #1b1d28 0%, transparent 60%),
       radial-gradient(900px 600px at 110% 0%, #10121a 0%, transparent 55%),
-      linear-gradient(180deg, #0b0b0f, #0a0a0d);
+      linear-gradient(180deg, #0b0b0f, #0a0b0f);
     color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
     display:flex; align-items:center; justify-content:center; padding:16px;
   }
@@ -36,24 +38,11 @@
     box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
     overflow:hidden;
   }
-  .header{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 18px; border-bottom:1px solid #1b1e2a;
-    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-  }
+  .header{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid #1b1e2a; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));}
   .title{ font-weight:800; letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
-  .title .dot{
-    width:12px; height:12px; border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold-3));
-    box-shadow:0 0 12px 2px rgba(245,197,66,.6), 0 0 30px rgba(245,197,66,.25) inset;
-  }
+  .title .dot{ width:12px; height:12px; border-radius:50%; background: radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold-3)); box-shadow:0 0 12px 2px rgba(245,197,66,.6), 0 0 30px rgba(245,197,66,.25) inset;}
   .toolbar{display:flex; gap:10px; flex-wrap:wrap}
-  .btn{
-    appearance:none; border:none; padding:10px 14px; border-radius:12px; cursor:pointer;
-    font-weight:700; color:#0b0b0f; background:linear-gradient(180deg,var(--gold),var(--gold-3));
-    box-shadow:0 6px 20px rgba(245,197,66,.25), inset 0 1px 0 rgba(255,255,255,.45);
-    transition:.2s transform ease,.2s box-shadow ease;
-  }
+  .btn{appearance:none; border:none; padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:700; color:#0b0b0f; background:linear-gradient(180deg,var(--gold),var(--gold-3)); box-shadow:0 6px 20px rgba(245,197,66,.25), inset 0 1px 0 rgba(255,255,255,.45); transition:.2s transform ease,.2s box-shadow ease;}
   .btn:hover{transform:translateY(-1px)}
   .btn:active{transform:translateY(1px) scale(.98)}
   .btn.ghost{ background:transparent; color:var(--ink); border:1px solid #2a2d3e; box-shadow:none; }
@@ -66,105 +55,35 @@
   .row-inline{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
   .grow{flex:1}
   label{font-size:12px; color:var(--muted); margin-bottom:6px; display:block}
-  input[type="text"], textarea{
-    width:100%; background:#0c0e14; border:1px solid #222639; color:var(--ink);
-    padding:12px 12px; border-radius:12px; outline:none; font-size:14px;
-  }
+  input[type="text"], textarea{width:100%; background:#0c0e14; border:1px solid #222639; color:var(--ink); padding:12px 12px; border-radius:12px; outline:none; font-size:14px;}
   textarea{min-height:110px; resize:vertical}
   .names{ display:flex; flex-wrap:wrap; gap:8px; max-height:180px; overflow:auto; padding-right:4px; }
-  .name-pill{
-    background:linear-gradient(180deg,#1a1d28,#121522);
-    border:1px solid #2a2d3e; border-radius:999px; padding:8px 12px; display:inline-flex; gap:10px; align-items:center;
-  }
+  .name-pill{ background:linear-gradient(180deg,#1a1d28,#121522); border:1px solid #2a2d3e; border-radius:999px; padding:8px 12px; display:inline-flex; gap:10px; align-items:center;}
   .name-pill b{letter-spacing:.2px}
-  .name-pill button{
-    background:#1f2230; color:#b6b9c5; border:1px solid #2f3346; border-radius:8px; padding:4px 8px; cursor:pointer;
-  }
-  .small{font-size:12px; color:var(--muted)}
+  .name-pill button{ background:#1f2230; color:#b6b9c5; border:1px solid #2f3346; border-radius:8px; padding:4px 8px; cursor:pointer;}
 
   /* ===== Wheel Area ===== */
-  .stage{
-    position:relative; display:flex; align-items:center; justify-content:center; padding:18px;
-    background:
-      radial-gradient(800px 400px at 50% -10%, rgba(245,197,66,.08), transparent 60%),
-      linear-gradient(180deg, #0e0f15, #0a0b10);
-  }
-  .wheel-wrap{
-    position:relative; width:min(560px, 92vw); aspect-ratio:1/1;
-    display:grid; place-items:center; margin:10px auto;
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,.45));
-  }
-  .pointer{
-    position:absolute; top:-8px; width:0; height:0; z-index:5;
-    border-left:16px solid transparent; border-right:16px solid transparent; border-bottom:26px solid var(--gold);
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,.6));
-  }
-  .wheel{
-    width:100%; height:100%; border-radius:50%; background:#111; display:block;
-    transform:rotate(var(--deg, 0deg)); transition: transform var(--dur, 0s) var(--easing, ease-out);
-    border:10px solid #0e0f15; box-shadow:inset 0 0 0 2px #2a2d3e, 0 0 0 8px #161823, inset 0 40px 80px rgba(0,0,0,.25);
-  }
-  /* teks di wheel: ada stroke gelap tipis agar jelas */
-  .wheel text{
-    paint-order:stroke;
-    stroke:rgba(0,0,0,.36);
-    stroke-width:.6px;
-  }
-  .hub{
-    position:absolute; width:84px; height:84px; border-radius:50%;
-    background: radial-gradient(circle at 35% 35%, #fff, #ccc 40%, #777 65%, #333 85%);
-    box-shadow: 0 8px 30px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.6);
-    z-index:3;
-  }
-  .hub::after{
-    content:""; position:absolute; inset:8px; border-radius:50%;
-    background: radial-gradient(circle at 35% 35%, var(--gold-2), var(--gold-3));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 22px rgba(245,197,66,.45);
-  }
-  .ring{
-    position:absolute; inset:-24px; border-radius:50%;
-    pointer-events:none;
-  }
-  .ring::before{
-    content:""; position:absolute; inset:0; border-radius:50%;
-    background:
-      radial-gradient(circle, rgba(255,255,255,.95) 0 55%, rgba(255,255,255,0) 60%) 50% 0/10% 10% repeat,
-      radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold-3));
-    -webkit-mask:
-      radial-gradient(circle, #000 52%, #0000 53%) 50% 50%/100% 100% no-repeat,
-      conic-gradient(from 0deg, #000 0 360deg);
-    mask:
-      radial-gradient(circle, #000 52%, #0000 53%) 50% 50%/100% 100% no-repeat,
-      conic-gradient(from 0deg, #000 0 360deg);
-    filter: drop-shadow(0 0 6px rgba(245,197,66,.85)) drop-shadow(0 0 14px rgba(245,197,66,.45));
-    animation: bulbs-rotate 9s linear infinite;
-  }
-  .ring::after{
-    content:""; position:absolute; inset:0; border-radius:50%;
-    animation: blink 1.2s steps(2,end) infinite;
-    box-shadow: inset 0 0 0 2px rgba(245,197,66,.35), inset 0 0 60px rgba(245,197,66,.18);
-  }
+  .stage{ position:relative; display:flex; align-items:center; justify-content:center; padding:18px; background: radial-gradient(800px 400px at 50% -10%, rgba(245,197,66,.08), transparent 60%), linear-gradient(180deg, #0e0f15, #0a0b10);}
+  .wheel-wrap{ position:relative; width:min(560px, 92vw); aspect-ratio:1/1; display:grid; place-items:center; margin:10px auto; filter: drop-shadow(0 30px 60px rgba(0,0,0,.45)); }
+  .pointer{ position:absolute; top:-8px; width:0; height:0; z-index:5; border-left:16px solid transparent; border-right:16px solid transparent; border-bottom:26px solid var(--gold); filter: drop-shadow(0 4px 10px rgba(0,0,0,.6)); }
+  .wheel{ width:100%; height:100%; border-radius:50%; background:#111; display:block; transform:rotate(var(--deg, 0deg)); transition: transform var(--dur, 0s) var(--easing, ease-out); border:10px solid #0e0f15; box-shadow:inset 0 0 0 2px #2a2d3e, 0 0 0 8px #161823, inset 0 40px 80px rgba(0,0,0,.25); }
+  .wheel text{ paint-order:stroke; stroke:rgba(0,0,0,.36); stroke-width:.6px; }
+
+  /* HUB + LOGO DI TENGAH */
+  .hub{ position:absolute; width:calc(var(--logo-size) + 20px); height:calc(var(--logo-size) + 20px); border-radius:50%; background: radial-gradient(circle at 35% 35%, #fff, #ccc 40%, #777 65%, #333 85%); box-shadow: 0 8px 30px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.6); z-index:3; display:grid; place-items:center; overflow:hidden;}
+  .hub::after{ content:""; position:absolute; inset:8px; border-radius:50%; background: radial-gradient(circle at 35% 35%, rgba(245,197,66,.7), rgba(241,183,10,.6)); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 22px rgba(245,197,66,.45); filter: blur(0.3px);}
+  .hub-logo{ position:relative; z-index:2; width:var(--logo-size); height:var(--logo-size); object-fit:contain; image-rendering:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+  .ring{ position:absolute; inset:-24px; border-radius:50%; pointer-events:none; }
+  .ring::before{ content:""; position:absolute; inset:0; border-radius:50%; background: radial-gradient(circle, rgba(255,255,255,.95) 0 55%, rgba(255,255,255,0) 60%) 50% 0/10% 10% repeat, radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold-3)); -webkit-mask: radial-gradient(circle, #000 52%, #0000 53%) 50% 50%/100% 100% no-repeat, conic-gradient(from 0deg, #000 0 360deg); mask: radial-gradient(circle, #000 52%, #0000 53%) 50% 50%/100% 100% no-repeat, conic-gradient(from 0deg, #000 0 360deg); filter: drop-shadow(0 0 6px rgba(245,197,66,.85)) drop-shadow(0 0 14px rgba(245,197,66,.45)); animation: bulbs-rotate 9s linear infinite;}
+  .ring::after{ content:""; position:absolute; inset:0; border-radius:50%; animation: blink 1.2s steps(2,end) infinite; box-shadow: inset 0 0 0 2px rgba(245,197,66,.35), inset 0 0 60px rgba(245,197,66,.18); }
   @keyframes bulbs-rotate{ to{ transform: rotate(360deg) } }
   @keyframes blink{ 50%{ box-shadow: inset 0 0 0 2px rgba(245,197,66,.6), inset 0 0 80px rgba(245,197,66,.26);} }
 
-  .winner-badge{
-    position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
-    background:linear-gradient(180deg, rgba(245,197,66,.18), rgba(245,197,66,.06));
-    border:1px solid rgba(245,197,66,.35); border-radius:12px; padding:10px 14px;
-    font-weight:700; color:var(--gold-2); letter-spacing:.3px; backdrop-filter: blur(6px);
-    box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
-    min-width:220px; text-align:center; display:none;
-  }
+  .winner-badge{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); background:linear-gradient(180deg, rgba(245,197,66,.18), rgba(245,197,66,.06)); border:1px solid rgba(245,197,66,.35); border-radius:12px; padding:10px 14px; font-weight:700; color:var(--gold-2); letter-spacing:.3px; backdrop-filter: blur(6px); box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08); min-width:220px; text-align:center; display:none; }
 
   canvas.confetti{ position:fixed; inset:0; width:100vw; height:100vh; pointer-events:none; z-index:9999; }
-
-  /* Modal */
   .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:10000; background:rgba(0,0,0,.35); backdrop-filter: blur(3px); }
-  .modal .box{
-    width:min(520px, 92vw); background:linear-gradient(180deg, #141622, #0f111a);
-    border:1px solid #2a2e42; border-radius:16px; padding:18px; text-align:center;
-    box-shadow: 0 20px 60px rgba(0,0,0,.5);
-  }
+  .modal .box{ width:min(520px, 92vw); background:linear-gradient(180deg, #141622, #0f111a); border:1px solid #2a2e42; border-radius:16px; padding:18px; text-align:center; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
   .modal h2{margin:10px 0 6px; color:var(--gold-2)}
   .modal p{margin:0 0 12px; color:#cfd3da}
 </style>
@@ -187,7 +106,12 @@
         <div class="wheel-wrap">
           <div class="pointer"></div>
           <svg class="wheel" id="wheel" viewBox="-50 -50 100 100" aria-label="Spin Wheel"></svg>
-          <div class="hub"></div>
+
+          <!-- 👉 LOGO kamu di tengah -->
+          <div class="hub">
+            <img class="hub-logo" src="./logo.png" alt="5G88 x EVO VIP">
+          </div>
+
           <div class="ring"></div>
           <div class="winner-badge" id="winnerBadge">—</div>
         </div>
@@ -265,247 +189,164 @@
   const removeAfterWinEl = document.getElementById('removeAfterWin');
 
   let NAMES = loadNames();
-  if(!NAMES.length){
-    NAMES = ['Alex','Bella','Chong','Dina','Evan','Farah','Gopal','Hana'];
-  }
+  if(!NAMES.length){ NAMES = ['Alex','Bella','Chong','Dina','Evan','Farah','Gopal','Hana']; }
   let spinning = false;
   let currentRotation = 0; // deg
 
-  // ===== Helpers =====
   function saveNames(){ localStorage.setItem(LS_KEY, JSON.stringify(NAMES)); }
   function loadNames(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'[]'); }catch{ return [] } }
   function unique(arr){ return [...new Set(arr.map(s=>s.trim()).filter(Boolean))]; }
   function anglePerSlice(){ return 360 / Math.max(NAMES.length,1); }
   function rad(deg){ return deg * Math.PI / 180 }
   function escapeHtml(s){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])) }
-
-  // Palet warna dinamis
-  function colorAt(i,total){
-    const hue = (i * (360/total) + 20) % 360;
-    const s = 75; const l = i % 2 ? 52 : 42;
-    return `hsl(${hue} ${s}% ${l}%)`;
-  }
-
-  // Path sektor
-  function arcPath(cx,cy,r, startDeg, endDeg){
-    const large = (endDeg - startDeg) > 180 ? 1 : 0;
-    const x1 = cx + r * Math.cos(rad(startDeg));
-    const y1 = cy + r * Math.sin(rad(startDeg));
-    const x2 = cx + r * Math.cos(rad(endDeg));
-    const y2 = cy + r * Math.sin(rad(endDeg));
+  function colorAt(i,total){ const hue=(i*(360/total)+20)%360; const s=75; const l=i%2?52:42; return `hsl(${hue} ${s}% ${l}%)`; }
+  function arcPath(cx,cy,r,startDeg,endDeg){
+    const large=(endDeg-startDeg)>180?1:0;
+    const x1=cx+r*Math.cos(rad(startDeg)), y1=cy+r*Math.sin(rad(startDeg));
+    const x2=cx+r*Math.cos(rad(endDeg)),   y2=cy+r*Math.sin(rad(endDeg));
     return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
   }
 
-  // ===== Render daftar & wheel =====
   function renderNamesPills(){
-    namesListEl.innerHTML = '';
+    namesListEl.innerHTML='';
     NAMES.forEach((n,i)=>{
-      const pill = document.createElement('span');
+      const pill=document.createElement('span');
       pill.className='name-pill';
-      pill.innerHTML = `<b>${escapeHtml(n)}</b>
-        <button title="Hapus" data-i="${i}">×</button>`;
+      pill.innerHTML=`<b>${escapeHtml(n)}</b><button title="Hapus" data-i="${i}">×</button>`;
       namesListEl.appendChild(pill);
     });
     namesListEl.querySelectorAll('button').forEach(btn=>{
-      btn.onclick = ()=>{
-        const idx = +btn.dataset.i;
-        NAMES.splice(idx,1);
-        saveNames(); update();
-      }
+      btn.onclick=()=>{ const idx=+btn.dataset.i; NAMES.splice(idx,1); saveNames(); update(); }
     });
-    countInfo.textContent = `${NAMES.length} nama`;
+    countInfo.textContent=`${NAMES.length} nama`;
   }
 
-  // === TEKS DI DALAM SLICE (seperti contoh) ===
+  // --- teks di dalam slice, center & rotate ---
   function renderWheel(){
-    const total = Math.max(NAMES.length,1);
-    wheel.innerHTML = '';
-    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
-    const A = 360/total;
-
-    // font adaptif
-    const baseFont = Math.max(2.8, Math.min(5.6, 9 - total*0.3)); // 2.8–5.6
+    const total=Math.max(NAMES.length,1);
+    wheel.innerHTML='';
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    const A=360/total;
+    const baseFont=Math.max(2.8, Math.min(5.6, 9-total*0.3)); // 2.8–5.6
 
     for(let i=0;i<total;i++){
-      const start = -90 + i*A, end = start + A;
-      const mid = (start + end)/2;
+      const start=-90+i*A, end=start+A, mid=(start+end)/2;
 
-      // slice
-      const pth = document.createElementNS('http://www.w3.org/2000/svg','path');
-      pth.setAttribute('d', arcPath(0,0,48, start, end));
-      pth.setAttribute('fill', NAMES.length ? colorAt(i,total) : '#1a1d28');
-      pth.setAttribute('stroke', '#0b0c12');
-      pth.setAttribute('stroke-width', '0.6');
-      g.appendChild(pth);
+      const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d', arcPath(0,0,48,start,end));
+      p.setAttribute('fill', NAMES.length? colorAt(i,total): '#1a1d28');
+      p.setAttribute('stroke','#0b0c12');
+      p.setAttribute('stroke-width','0.6');
+      g.appendChild(p);
 
-      // grup label diputar ke tengah slice
-      const labelG = document.createElementNS('http://www.w3.org/2000/svg','g');
-      labelG.setAttribute('transform', `rotate(${mid})`);
+      const labelG=document.createElementNS('http://www.w3.org/2000/svg','g');
+      labelG.setAttribute('transform',`rotate(${mid})`);
 
-      // teks
-      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
-      t.setAttribute('fill', '#fff');
-      t.setAttribute('font-size', String(baseFont));
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('fill','#fff');
+      t.setAttribute('font-size',String(baseFont));
       t.setAttribute('font-weight','700');
       t.setAttribute('text-anchor','middle');
       t.setAttribute('dominant-baseline','middle');
       t.setAttribute('x','28'); t.setAttribute('y','0');
 
-      const maxChars = Math.max(6, Math.floor(18 - total*0.6)); // batasi panjang
-      let label = (NAMES[i] || '—').trim();
-      if (label.length > maxChars) label = label.slice(0, maxChars - 1) + '…';
-      t.textContent = label;
+      const maxChars=Math.max(6, Math.floor(18-total*0.6));
+      let label=(NAMES[i]||'—').trim();
+      if(label.length>maxChars) label=label.slice(0,maxChars-1)+'…';
+      t.textContent=label;
 
       labelG.appendChild(t);
       g.appendChild(labelG);
 
-      // background kontras tipis di belakang teks (setelah tahu ukuran)
-      const bbox = t.getBBox ? t.getBBox() : {width:0,height:0};
-      const bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      const bbox=t.getBBox? t.getBBox(): {width:0,height:0};
+      const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
       const padX=7, padY=3, rx=3;
-      bg.setAttribute('x', String(28 - bbox.width/2 - padX));
-      bg.setAttribute('y', String(-bbox.height/2 - padY + 1));
-      bg.setAttribute('width', String(bbox.width + padX*2));
-      bg.setAttribute('height', String(bbox.height + padY*2));
+      bg.setAttribute('x', String(28-bbox.width/2-padX));
+      bg.setAttribute('y', String(-bbox.height/2-padY+1));
+      bg.setAttribute('width', String(bbox.width+padX*2));
+      bg.setAttribute('height', String(bbox.height+padY*2));
       bg.setAttribute('rx', String(rx));
-      bg.setAttribute('fill', 'rgba(0,0,0,.22)');
-      bg.setAttribute('stroke', 'rgba(255,255,255,.12)');
-      labelG.insertBefore(bg, t);
+      bg.setAttribute('fill','rgba(0,0,0,.22)');
+      bg.setAttribute('stroke','rgba(255,255,255,.12)');
+      labelG.insertBefore(bg,t);
     }
     wheel.appendChild(g);
   }
 
   function update(){ renderWheel(); renderNamesPills(); saveNames(); }
 
-  // ===== Spin logic =====
+  // --- Spin ---
   function spin(opts={}){
     if(spinning || NAMES.length===0) return;
-    spinning = true;
-    badge.style.display='none';
-
-    const slice = anglePerSlice();
-    const idx = Math.floor(Math.random()*NAMES.length);
-
-    // tengah slice i: -90 + (i+0.5)*slice
-    const sliceCenter = -90 + (idx + 0.5) * slice;
-    const target = 360*(opts.quick?5:10) + (-sliceCenter);
-    const duration = opts.quick ? 2500 : 4800;
+    spinning=true; badge.style.display='none';
+    const slice=anglePerSlice();
+    const idx=Math.floor(Math.random()*NAMES.length);
+    const sliceCenter=-90+(idx+0.5)*slice;
+    const target=360*(opts.quick?5:10)+(-sliceCenter);
+    const duration=opts.quick?2500:4800;
 
     wheel.style.setProperty('--dur', duration+'ms');
-    wheel.style.setProperty('--easing', 'cubic-bezier(.12,.05,0,1)');
-    currentRotation = (currentRotation + target) % 360;
+    wheel.style.setProperty('--easing','cubic-bezier(.12,.05,0,1)');
+    currentRotation=(currentRotation+target)%360;
     wheel.style.setProperty('--deg', currentRotation+'deg');
-
     playTickSound(duration);
 
     setTimeout(()=>{
-      spinning = false;
-      const winner = NAMES[idx];
-      badge.textContent = 'Pemenang: ' + winner;
-      badge.style.display = 'block';
+      spinning=false;
+      const winner=NAMES[idx];
+      badge.textContent='Pemenang: '+winner;
+      badge.style.display='block';
       showConfetti();
       showWinnerModal(winner);
-
-      if(removeAfterWinEl.checked){
-        NAMES.splice(idx,1);
-        update();
-      }
-    }, duration + 60);
+      if(removeAfterWinEl.checked){ NAMES.splice(idx,1); update(); }
+    }, duration+60);
   }
 
-  // ===== Confetti =====
-  let confettis = [];
-  function resizeCanvas(){ confettiCanvas.width = innerWidth; confettiCanvas.height = innerHeight; }
-  window.addEventListener('resize', resizeCanvas); resizeCanvas();
-
-  function makeConfettiBurst(n=220){
-    confettis = [];
+  // --- Confetti ---
+  let confettis=[];
+  function resizeCanvas(){ confettiCanvas.width=innerWidth; confettiCanvas.height=innerHeight; }
+  addEventListener('resize',resizeCanvas); resizeCanvas();
+  function makeConfettiBurst(n=240){
+    confettis=[];
     for(let i=0;i<n;i++){
-      confettis.push({
-        x: Math.random()*confettiCanvas.width,
-        y: -20 - Math.random()*40,
-        vx: (Math.random()-.5)*6,
-        vy: Math.random()*2+3,
-        g: .05 + Math.random()*.05,
-        a: Math.random()*Math.PI,
-        va: (Math.random()-.5)*.2,
-        s: 4+Math.random()*6,
-        c: `hsl(${Math.random()*360} 80% 60%)`,
-        life: 200 + Math.random()*120
-      });
+      confettis.push({ x:Math.random()*confettiCanvas.width, y:-20-Math.random()*40, vx:(Math.random()-.5)*6, vy:Math.random()*2+3, g:.05+Math.random()*.05, a:Math.random()*Math.PI, va:(Math.random()-.5)*.2, s:4+Math.random()*6, c:`hsl(${Math.random()*360} 80% 60%)`, life:200+Math.random()*120 });
     }
   }
   (function step(){
     ctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
-    confettis.forEach(p=>{
-      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.a += p.va; p.life--;
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a);
-      ctx.fillStyle = p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s); ctx.restore();
-    });
-    confettis = confettis.filter(p=>p.life>0 && p.y<confettiCanvas.height+20);
+    confettis.forEach(p=>{ p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.a+=p.va; p.life--; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s); ctx.restore(); });
+    confettis=confettis.filter(p=>p.life>0 && p.y<confettiCanvas.height+20);
     requestAnimationFrame(step);
   })();
-  function showConfetti(){ makeConfettiBurst(240); }
+  function showConfetti(){ makeConfettiBurst(260); }
 
-  // ===== Soft tick sound (opsional) =====
-  const audioCtx = window.AudioContext ? new AudioContext() : null;
+  // --- Tick sound (opsional) ---
+  const audioCtx=window.AudioContext? new AudioContext(): null;
   function playTickSound(duration){
     if(!audioCtx) return;
-    const start = audioCtx.currentTime;
-    const end = start + duration/1000;
-    let t = start, interval = 0.07;
-    function tickOnce(at){
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type='square'; o.frequency.value = 800;
-      g.gain.setValueAtTime(0.0001, at);
-      g.gain.exponentialRampToValueAtTime(0.12, at+0.005);
-      g.gain.exponentialRampToValueAtTime(0.0001, at+0.04);
-      o.connect(g).connect(audioCtx.destination); o.start(at); o.stop(at+0.05);
-    }
-    while(t < end){ tickOnce(t); t += interval; }
+    const start=audioCtx.currentTime, end=start+duration/1000; let t=start, interval=0.07;
+    function tick(at){ const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='square'; o.frequency.value=800; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(0.12,at+0.005); g.gain.exponentialRampToValueAtTime(0.0001,at+0.04); o.connect(g).connect(audioCtx.destination); o.start(at); o.stop(at+0.05); }
+    while(t<end){ tick(t); t+=interval; }
   }
 
-  // ===== UI bindings =====
-  document.getElementById('btnSpin').onclick = ()=>spin();
-  document.getElementById('btnSpinQuick').onclick = ()=>spin({quick:true});
-  document.getElementById('btnShuffle').onclick = ()=>{
-    for(let i=NAMES.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [NAMES[i],NAMES[j]]=[NAMES[j],NAMES[i]]; }
-    update();
-  };
-  document.getElementById('btnClear').onclick = ()=>{
-    if(confirm('Kosongkan semua nama?')){ NAMES = []; update(); }
-  };
-  document.getElementById('btnExport').onclick = ()=>{
-    const blob = new Blob([NAMES.join('\n')], {type:'text/plain'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'lucky-draw-names.txt'; a.click(); URL.revokeObjectURL(a.href);
-  };
-  document.getElementById('btnFullscreen').onclick = ()=>{
-    const root = document.documentElement;
-    if(!document.fullscreenElement){ root.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
-  };
-  document.getElementById('btnAdd').onclick = ()=>{
-    const v = document.getElementById('nameInput').value.trim();
-    if(!v) return; NAMES = unique([...NAMES, v]); document.getElementById('nameInput').value=''; update();
-  };
-  document.getElementById('btnBulkAdd').onclick = ()=>{
-    const raw = document.getElementById('bulkInput').value;
-    const parts = raw.split(/[\n,;]+/).map(s=>s.trim()).filter(Boolean);
-    if(parts.length){ NAMES = unique([...NAMES, ...parts]); document.getElementById('bulkInput').value=''; update(); }
-  };
+  // --- UI ---
+  document.getElementById('btnSpin').onclick=()=>spin();
+  document.getElementById('btnSpinQuick').onclick=()=>spin({quick:true});
+  document.getElementById('btnShuffle').onclick=()=>{ for(let i=NAMES.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [NAMES[i],NAMES[j]]=[NAMES[j],NAMES[i]]; } update(); };
+  document.getElementById('btnClear').onclick=()=>{ if(confirm('Kosongkan semua nama?')){ NAMES=[]; update(); } };
+  document.getElementById('btnExport').onclick=()=>{ const blob=new Blob([NAMES.join('\n')],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='lucky-draw-names.txt'; a.click(); URL.revokeObjectURL(a.href); };
+  document.getElementById('btnFullscreen').onclick=()=>{ const root=document.documentElement; if(!document.fullscreenElement){ root.requestFullscreen?.(); } else { document.exitFullscreen?.(); } };
+  document.getElementById('btnAdd').onclick=()=>{ const v=document.getElementById('nameInput').value.trim(); if(!v) return; NAMES=unique([...NAMES,v]); document.getElementById('nameInput').value=''; update(); };
+  document.getElementById('btnBulkAdd').onclick=()=>{ const raw=document.getElementById('bulkInput').value; const parts=raw.split(/[\n,;]+/).map(s=>s.trim()).filter(Boolean); if(parts.length){ NAMES=unique([...NAMES,...parts]); document.getElementById('bulkInput').value=''; update(); } };
 
-  // Modal
-  document.getElementById('btnSpinAgain').onclick = ()=>{ winModal.style.display='none'; setTimeout(()=>spin(),200); };
-  document.getElementById('btnCloseModal').onclick = ()=> winModal.style.display='none';
-  winModal.addEventListener('click', (e)=>{ if(e.target===winModal) winModal.style.display='none'; });
+  document.getElementById('btnSpinAgain').onclick=()=>{ winModal.style.display='none'; setTimeout(()=>spin(),200); };
+  document.getElementById('btnCloseModal').onclick=()=> winModal.style.display='none';
+  winModal.addEventListener('click',(e)=>{ if(e.target===winModal) winModal.style.display='none'; });
 
-  function showWinnerModal(name){ winNameEl.textContent = name; winModal.style.display='flex'; }
+  function showWinnerModal(name){ winNameEl.textContent=name; winModal.style.display='flex'; }
 
-  // Init
   update();
 
-  // Shortcuts
   document.addEventListener('keydown',(e)=>{
     if(e.code==='Space'){ e.preventDefault(); spin(); }
     if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='i'){ document.getElementById('nameInput').focus(); }
